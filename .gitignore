@@ -484,3 +484,5 @@ $RECYCLE.BIN/
 *.swp
 EventPlanner/API/appsettings.json
 EventPlanner/API/eventplanner.db
+EventPlanner/API/eventplanner.db-shm
+EventPlanner/API/eventplanner.db-wal
