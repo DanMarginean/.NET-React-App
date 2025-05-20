@@ -1,5 +1,6 @@
 import { Grid2} from "@mui/material";
 import ActivityList from "./ActivityList";
+import ActivityFilters from "./ActivityFilters";
 
 // type Props ={
 //     activities : Activity[]
@@ -17,14 +18,14 @@ export default function ActivityDashboard() {
 
     return (
         <Grid2 container spacing={3}>
-            <Grid2 size={7}>
+            <Grid2 size={8}>
                 <ActivityList 
                 // activities={activities}
                 // selectActivity ={selectActivity}
                 // deleteActivity = {deleteActivity}
                 />
             </Grid2>
-            <Grid2 size={5}>
+            <Grid2 size={4}>
                 {/* {selectedActivity && !editMode &&
                 <ActivityDetails 
                 selectedActivity={selectedActivity}
@@ -35,7 +36,7 @@ export default function ActivityDashboard() {
                 <ActivityForm closeForm={closeForm} activity={selectedActivity}
                 // submitForm={submitForm}
                 />} */}
-                Activity Filters
+                <ActivityFilters/>
             </Grid2>
         </Grid2>
     )
