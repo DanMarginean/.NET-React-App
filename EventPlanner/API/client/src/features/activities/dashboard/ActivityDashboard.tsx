@@ -1,39 +1,31 @@
-import { Grid2 } from "@mui/material";
+import { Grid2} from "@mui/material";
 import ActivityList from "./ActivityList";
-import ActivityDetails from "../details/ActivityDetails";
-import ActivityForm from "../form/ActivityForm";
 
-type Props ={
-    activities : Activity[]
-    selectActivity: (id : string) => void
-    cancelSelectActivity : () => void
-    selectedActivity ?: Activity
-    openForm:(id:string) => void;
-    closeForm:()=>void
-    editMode: boolean
-    // submitForm : (activity:Activity) => void
-    // deleteActivity : (id:string) => void
-}
+// type Props ={
+//     activities : Activity[]
+//     selectActivity: (id : string) => void
+//     cancelSelectActivity : () => void
+//     selectedActivity ?: Activity
+//     openForm:(id:string) => void;
+//     closeForm:()=>void
+//     editMode: boolean
+//     submitForm : (activity:Activity) => void
+//     deleteActivity : (id:string) => void
+// }
 
-export default function ActivityDashboard({activities,selectActivity,cancelSelectActivity,
-    selectedActivity,
-    openForm,
-    closeForm,
-    editMode,
-    // submitForm,
-    // deleteActivity
-}:Props) {
+export default function ActivityDashboard() {
+
     return (
         <Grid2 container spacing={3}>
             <Grid2 size={7}>
                 <ActivityList 
-                activities={activities}
-                selectActivity ={selectActivity}
+                // activities={activities}
+                // selectActivity ={selectActivity}
                 // deleteActivity = {deleteActivity}
                 />
             </Grid2>
             <Grid2 size={5}>
-                {selectedActivity && !editMode &&
+                {/* {selectedActivity && !editMode &&
                 <ActivityDetails 
                 selectedActivity={selectedActivity}
                 cancelSelectActivity = {cancelSelectActivity}
@@ -42,7 +34,8 @@ export default function ActivityDashboard({activities,selectActivity,cancelSelec
                  {editMode &&
                 <ActivityForm closeForm={closeForm} activity={selectedActivity}
                 // submitForm={submitForm}
-                />}
+                />} */}
+                Activity Filters
             </Grid2>
         </Grid2>
     )
