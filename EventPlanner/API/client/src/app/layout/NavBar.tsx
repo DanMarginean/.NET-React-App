@@ -40,17 +40,11 @@ export default function NavBar() {
                <MenuItemLink to='/counter'>
                 Counter
               </MenuItemLink>
-              {/* <MenuItem sx={{
-                fontSize: '1.2rem', textTransform: 'uppercase', fontWeight: 'bold'
-              }}>
-                Contact
-              </MenuItem> */}
+              <MenuItemLink to='/errors'>
+                Errors
+              </MenuItemLink>
 
             </Box>
-            {/* <Button size="large" variant="contained" color="warning"
-                onClick={() => {}}
-            >
-              Create Event</Button> */}
               <MenuItem>
               User menu
               </MenuItem>
