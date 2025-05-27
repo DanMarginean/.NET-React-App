@@ -4,12 +4,14 @@ using Application.Activities.DTOs;
 using Application.Queries;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
 public class ActivitiesController() :BaseAPIController
 {
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<List<Activity>>> GetActivities() //CancellationToken ct
     {
