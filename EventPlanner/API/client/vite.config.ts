@@ -4,8 +4,13 @@ import mkcert from 'vite-plugin-mkcert';
 
 // https://vite.dev/config/
 export default defineConfig({
-  server:{
+  build: {
+    outDir: '../API/wwwroot',
+    chunkSizeWarningLimit: 1500,
+    emptyOutDir: true
+  },
+  server: {
     port: 3000
   },
-  plugins: [react(),mkcert()],
+  plugins: [react(), mkcert()],
 })
