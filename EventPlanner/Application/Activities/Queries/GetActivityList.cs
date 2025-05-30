@@ -1,4 +1,7 @@
 using System;
+using API.Application.Activities.DTOs;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -10,11 +13,11 @@ namespace Application.Queries;
 public class GetActivityList
 {
 
-    public class Query : IRequest<List<Activity>>{}
+    public class Query : IRequest<List<ActivityDto>>{}
 
-    public class Handler(AppDbContext context) : IRequestHandler<Query, List<Activity>> //, ILogger<GetActivityList> logger
+    public class Handler(AppDbContext context, IMapper mapper) : IRequestHandler<Query, List<ActivityDto>> //, ILogger<GetActivityList> logger
     {
-        public async Task<List<Activity>> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<List<ActivityDto>> Handle(Query request, CancellationToken cancellationToken)
         {
 
             // try
@@ -33,7 +36,9 @@ public class GetActivityList
             // }
 
             // throw new NotImplementedException();
-             return await context.Activities.ToListAsync(cancellationToken);
+             return await context.Activities
+                .ProjectTo<ActivityDto>(mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken);
         }
     }
  
