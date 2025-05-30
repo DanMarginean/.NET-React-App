@@ -1,7 +1,7 @@
 import './App.tsx'
 import { Box, Container, CssBaseline } from '@mui/material';
 import NavBar from './NavBar.tsx';
-import { Outlet, useLocation } from 'react-router';
+import { Outlet, ScrollRestoration, useLocation } from 'react-router';
 import HomePage from '../../features/home/HomePage.tsx';
 
 // jsx = javascript+xml ce seamana cu html
@@ -10,6 +10,7 @@ function App() {
     // here it can return jsut one thing so all should be contained in a single statement
     return (
       <Box sx={{ bgcolor: '#eeeeee', minHeight: '100vh'}}>
+        <ScrollRestoration/>
         <CssBaseline></CssBaseline>
         {location.pathname === '/' ? <HomePage/> : (
           <>
