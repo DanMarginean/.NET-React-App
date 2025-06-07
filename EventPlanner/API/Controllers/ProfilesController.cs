@@ -39,4 +39,5 @@ public class ProfilesController : BaseAPIController
     {
         return HandleResult(await Mediator.Send(new GetProfile.Query { UserId = userId }));
     }
+
 }

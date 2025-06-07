@@ -28,7 +28,10 @@ export default function UserMenu() {
                 sx={{fontSize: '1.1rem'}}
             >
                 <Box display='flex' alignItems='center' gap={2}>
-                    <Avatar/>
+                    <Avatar 
+                    src={currentUser?.imageUrl}
+                    alt='Current User image'
+                    />
                     {currentUser?.displayName}
                 </Box>
             </Button>
@@ -47,7 +50,7 @@ export default function UserMenu() {
                     </ListItemIcon>
                     <ListItemText>Create Event</ListItemText>
                 </MenuItem>
-                 <MenuItem component={Link} to='/profile' onClick={handleClose}>
+                 <MenuItem component={Link} to={`/profiles/${currentUser?.id}`} onClick={handleClose}>
                     <ListItemIcon>
                         <Person/>
                     </ListItemIcon>
