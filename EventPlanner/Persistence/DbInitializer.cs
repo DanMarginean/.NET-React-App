@@ -11,9 +11,9 @@ public class DbInitializer
     {
         var users = new List<User>
             {
-                new() {DisplayName = "Dan", UserName = "dan@test.com", Email = "dan@test.com"},
-                new() {DisplayName = "Vlad", UserName = "vlad@test.com", Email = "vlad@test.com"},
-                new() {DisplayName = "Radu", UserName = "radu@test.com", Email = "radu@test.com"}
+                new() {Id = "dan-id", DisplayName = "Dan", UserName = "dan@test.com", Email = "dan@test.com"},
+                new() {Id = "vlad-id", DisplayName = "Vlad", UserName = "vlad@test.com", Email = "vlad@test.com"},
+                new() {Id = "radu-id", DisplayName = "Radu", UserName = "radu@test.com", Email = "radu@test.com"}
             };
 
         if (!userManager.Users.Any())

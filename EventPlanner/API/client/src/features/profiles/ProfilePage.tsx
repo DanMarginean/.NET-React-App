@@ -1,10 +1,8 @@
 import {  Grid2, Typography } from '@mui/material'
-import React from 'react'
 import ProfileHeader from './ProfileHeader'
 import ProfileContent from './ProfileContent'
 import { useParams } from 'react-router'
 import { useProfile } from '../../lib/hooks/useProfile'
-import { ReplyTwoTone } from '@mui/icons-material'
 
 export default function ProfilePage() {
   const {id} = useParams();
@@ -17,7 +15,7 @@ export default function ProfilePage() {
   return (
     <Grid2 container>
         <Grid2 size={12}>
-            <ProfileHeader profile={profile}/>
+            <ProfileHeader />
             <ProfileContent/>
         </Grid2>
       
