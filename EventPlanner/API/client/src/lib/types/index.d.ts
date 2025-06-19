@@ -2,6 +2,11 @@
 // this is the type of reponse that the server it retrieves 
 // is needed so that typescript to know what properties each "object" has
 // if this was JS it whould not throw an typo 
+type PagedList<T,TCursor> = {
+  items: T[],
+  nextCursor: TCursor
+}
+
 type Activity = {
     id: string
     title: string
@@ -18,7 +23,7 @@ type Activity = {
     isHost:boolean
     hostId: string
     hostDisplayName: string
-    hostImageUrl: string
+    hostImageUrl?: string
 }
 
 type Profile = {

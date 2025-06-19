@@ -1,6 +1,9 @@
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace Domain;
+
+[Index(nameof(Date))]
 
 public class Activity
 {

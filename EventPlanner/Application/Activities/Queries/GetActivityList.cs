@@ -1,5 +1,6 @@
 using System;
 using API.Application.Activities.DTOs;
+using Application.Core;
 using Application.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -13,34 +14,51 @@ namespace Application.Queries;
 
 public class GetActivityList
 {
+    private const int MaxPageSize = 50;
 
-    public class Query : IRequest<List<ActivityDto>>{}
 
-    public class Handler(AppDbContext context, IMapper mapper,IUserAccessor userAccessor) : IRequestHandler<Query, List<ActivityDto>> //, ILogger<GetActivityList> logger
+    public class Query : IRequest<Result<PagedList<ActivityDto, DateTime?>>>
     {
-        public async Task<List<ActivityDto>> Handle(Query request, CancellationToken cancellationToken)
+        public DateTime? Cursor { get; set; }
+        private int _pageSize;
+        public int PageSize
         {
+            get => _pageSize;
+            set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
+        }
+    }
 
-            // try
-            // {
-            //     for (int i = 0; i < 10; i++)
-            //     {
-            //         cancellationToken.ThrowIfCancellationRequested();
-            //         await Task.Delay(1000, cancellationToken);
-            //         logger.LogInformation($"Task {i} has completeed");
-            //     }
-            // }
-            // catch (System.Exception)
-            // {
-            //     logger.LogInformation("Task cancelled");
-            //     // throw;
-            // }
+    public class Handler(AppDbContext context, IMapper mapper,IUserAccessor userAccessor) : IRequestHandler<Query, Result<PagedList<ActivityDto, DateTime?>>> //, ILogger<GetActivityList> logger
+    {
+        public async Task<Result<PagedList<ActivityDto, DateTime?>>> Handle(Query request, CancellationToken cancellationToken)
+        {
+            var query = context.Activities
+                .OrderBy(x => x.Date)
+                .AsQueryable();
+            if (request.Cursor.HasValue)
+            {
+                query = query.Where(x => x.Date >= request.Cursor.Value);
+            }
 
-            // throw new NotImplementedException();
-             return await context.Activities
+            var activities = await query
+                .Take(request.PageSize + 1)
                 .ProjectTo<ActivityDto>(mapper.ConfigurationProvider,
-                    new { currentUserId = userAccessor.GetUserId()})
+                   new { currentUserId = userAccessor.GetUserId() })
                 .ToListAsync(cancellationToken);
+
+            DateTime? nextCursor = null;
+            if (activities.Count > request.PageSize)
+            {
+                nextCursor = activities.Last().Date;
+                activities.RemoveAt(activities.Count - 1);
+            }
+            return Result<PagedList<ActivityDto, DateTime?>>.Success(
+                new PagedList<ActivityDto, DateTime?>
+                {
+                    Items = activities,
+                    NextCursor = nextCursor
+                }
+            );
         }
     }
  
