@@ -1,6 +1,7 @@
 using API.Application.Activities.DTOs;
 using Application.Activities.Commands;
 using Application.Activities.DTOs;
+using Application.Activities.Queries;
 using Application.Core;
 using Application.Queries;
 using Microsoft.AspNetCore.Authorization;
@@ -12,9 +13,9 @@ public class ActivitiesController() : BaseAPIController
 {
     [AllowAnonymous]
     [HttpGet]
-    public async Task<ActionResult<PagedList<ActivityDto,DateTime?>>> GetActivities(DateTime? cursor) //CancellationToken ct
+    public async Task<ActionResult<PagedList<ActivityDto,DateTime?>>> GetActivities([FromQuery]ActivityParams activityParams) //CancellationToken ct
     {
-        return HandleResult( await Mediator.Send(new GetActivityList.Query { Cursor = cursor })); //,ct
+        return HandleResult( await Mediator.Send(new GetActivityList.Query { Params = activityParams })); //,ct
     }
 
     [HttpGet("{id}")]
