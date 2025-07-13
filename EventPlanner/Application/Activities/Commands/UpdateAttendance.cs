@@ -5,7 +5,6 @@ using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using SQLitePCL;
 
 namespace Application.Activities.Commands;
 
